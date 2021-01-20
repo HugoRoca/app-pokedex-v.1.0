@@ -1,0 +1,11 @@
+swagger: "2.0"
+info:
+  description: "This documentation will support integrations with Pokedex."
+  version: "1.0.0"
+  title: "API Pokedex"
+tags:
+- name: "pokemons"
+  description: "Collection pokemons"
+schemes:
+- "http"
+- "https"
