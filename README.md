@@ -6,3 +6,5 @@ Steps
   - 1. `npm i`
   - 2. `npm run format`
   - 3. `npm start`
+- access to swagger of API: `/api/docs`
+

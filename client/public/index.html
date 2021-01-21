@@ -4,115 +4,323 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokemon</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./css-loader.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/css-loader.css" />
   </head>
   <body>
     <div id="loading" class="loader loader-default"></div>
-    
+
     <div class="container">
-      <h1 class="text-center">Pokemon List</h1>
+      <h1 class="text-center display-1">Pokemons</h1>
       <div class="input-group mb-3 w-50 text-center mx-auto">
-        <input type="text" class="form-control" placeholder="Search a pokemon" aria-label="Search a pokemon" aria-describedby="basic-addon2">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search a pokemon"
+          aria-label="Search a pokemon"
+          aria-describedby="basic-addon2"
+          id="txtPokemonSearch"
+        />
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="btnSearch">Search</button>
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="btnSearch"
+          >
+            Search
+          </button>
         </div>
       </div>
 
-      <hr class="mb-3"/>
+      <hr class="mb-3" />
 
-      <div class="row">
-        <div class="col-xs-12 col-md-3 col-lg-3 mb-3">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary mx-auto">Go somewhere</a>
-            </div>
+      <div class="row" id="listSection"></div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="modelMoreInformation"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="titlePokemon"></h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        </div>
-        <div class="col-xs-12 col-md-3 col-lg-3 mb-3">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-3 col-lg-3 mb-3">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-3 col-lg-3 mb-3">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-3 col-lg-3 mb-3">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-3 col-lg-3 mb-3">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-3 col-lg-3 mb-3">
-          <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+          <div class="modal-body" id="modalPokemonData"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
     </div>
 
-    
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./script.js"></script>
+    <script src="./scripts/popper.min.js"></script>
+    <script src="./scripts/bootstrap.min.js"></script>
+    <script src="./scripts/handlebars.js"></script>
+    <script src="./scripts/handlebarsHelper.js"></script>
+    <script src="./scripts/events.js"></script>
+
+    <script id="js-modelMoreInformation" type="text/x-handlebars-template">
+      <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-6">
+          <img
+            class="rounded mx-auto d-block"
+            src="{{image}}"
+            alt=""
+            id="imagePokemon"
+          />
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-6">
+          <h6>
+            HP:
+          </h6>
+          <div class="progress">
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              style="{{concatWidth base.HP}}"
+              aria-valuenow="{{base.HP}}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ base.HP }}%
+            </div>
+          </div>
+          <hr />
+          <h6>
+            Attack:
+          </h6>
+          <div class="progress">
+            <div
+              class="progress-bar bg-info"
+              role="progressbar"
+              style="{{ concatWidth base.Attack}}"
+              aria-valuenow="{{ base.Attack }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ base.Attack }}%
+            </div>
+          </div>
+          <hr />
+          <h6>
+            Defense:
+          </h6>
+          <div class="progress">
+            <div
+              class="progress-bar bg-warning"
+              role="progressbar"
+              style="{{ concatWidth base.Defense }}"
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              75%
+            </div>
+          </div>
+          <hr />
+          <h6>
+            Speed:
+          </h6>
+          <div class="progress">
+            <div
+              class="progress-bar bg-danger"
+              role="progressbar"
+              style="{{ concatWidth base.Speed }}"
+              aria-valuenow="{{base.Speed}}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{base.Speed}}%
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-12">
+          <hr />
+          <h6>
+            Special
+          </h6>
+          <div class="progress">
+            <div
+              class="progress-bar bg-danger"
+              role="progressbar"
+              style="{{ concatWidth base.sp.Attack }}"
+              aria-valuenow="{{base.sp.Attack}}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              Attack {{base.sp.Attack}}%
+            </div>
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              style="{{ concatWidth base.sp.Defense }}"
+              aria-valuenow="{{base.sp.Defense}}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              Defense {{base.sp.Defense}}%
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script id="js-listSectionTemplate" type="text/x-handlebars-template">
+      {{#each this as |item|}}
+        <div class="col-xs-12 col-md-2 col-lg-2 mb-3">
+          <div class="card">
+            <img
+              class="rounded mx-auto d-block"
+              src="{{item.image}}"
+              alt="Card image cap"
+              style="width: 100%;"
+            />
+            <div class="card-body" data-item="PokemonInformation">
+              <h5 class="card-title">
+                {{item.name.english}}
+              </h5>
+              <p class="card-text text-center">
+                {{#each item.type as |value|}}
+                  {{#iff value "==" "Grass"}}
+                    <span class="badge badge-grass">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                  {{#iff value "==" "Poison"}}
+                    <span class="badge badge-poison">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                  {{#iff value "==" "Normal"}}
+                    <span class="badge badge-Normal">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                  {{#iff value "==" "Fire"}}
+                    <span class="badge badge-Fire">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                  {{#iff value "==" "Water"}}
+                    <span class="badge badge-Water">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                  {{#iff value "==" "Electric"}}
+                    <span class="badge badge-Electric">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                  {{#iff value "==" "Ice"}}
+                    <span class="badge badge-Ice">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                  {{#iff value "==" "Fighting"}}
+                    <span class="badge badge-Fighting">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                  {{#iff value "==" "Ground"}}
+                    <span class="badge badge-Ground">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                  {{#iff value "==" "Flying"}}
+                    <span class="badge badge-Flying">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+
+                  {{#iff value "==" "Psychic"}}
+                    <span class="badge badge-Psychic">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+
+                  {{#iff value "==" "Bug"}}
+                    <span class="badge badge-Bug">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+
+                  {{#iff value "==" "Rock"}}
+                    <span class="badge badge-Rock">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+
+                  {{#iff value "==" "Ghost "}}
+                    <span class="badge badge-Ghost">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+
+                  {{#iff value "==" "Dragon"}}
+                    <span class="badge badge-Dragon">
+                      {{value}}
+                    </span>
+                  {{/iff}}
+                {{/each}}
+              </p>
+              <input type="hidden" id="jsonPokemon" value="{{ JSON2string this }}">
+              <button
+                class="btn btn-outline-dark mx-auto d-block"
+                data-toggle="modal"
+                data-target="#modelMoreInformation"
+                id="btnModelMoreInformation"
+                onClick="javascript:callModalPokemon({{ JSON2string this}});"
+              >
+                More...
+              </button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </script>
+
+    <script>
+      var _pokemonEvent = PokemonEvent();
+      var load = false;
+      var pageNumber = 0;
+      var pageLimit = 12;
+      var totalPage = 68;
+      var textSearch = "";
+    </script>
+    <script src="./scripts/script.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        openLoad();
+        _pokemonEvent.applyChanges(_pokemonEvent.eventName.onPokemonEvent);
+
+        $(window).scroll(function () {
+          if (validateScroll()) {
+            _pokemonEvent.applyChanges(_pokemonEvent.eventName.onPokemonEvent);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
