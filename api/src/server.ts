@@ -8,6 +8,7 @@ import compress from './utils/compress'
 import notFavicon from './utils/api-not-favicon'
 import apiError from './utils/api-error'
 import routes from './routes'
+import cors from '@koa/cors'
 import {
   access as accessLogger,
   error as errorLogger,
@@ -28,6 +29,7 @@ server
   .use(notFavicon)
   .use(apiError)
   .use(docs)
+  .use(cors())
 
 routes.map((x) => {
   server.use(x.routes()).use(x.allowedMethods())
