@@ -13,6 +13,7 @@ import {
   error as errorLogger,
 } from './utils/api-logger'
 import docs from './utils/api-docs'
+import { MongoHelper } from './utils/mongoHelper'
 
 const env = yenv()
 const PORT = env.PORT
@@ -32,10 +33,12 @@ routes.map((x) => {
   server.use(x.routes()).use(x.allowedMethods())
 })
 
-if (env.NODE_ENV !== 'test') {
-  server.listen(PORT, '0.0.0.0', () =>
-    log.info(`server is running on PORT ${PORT}`)
-  )
-}
+MongoHelper.connect(env.DATABASE.MONGO_DB.URL).then(() => {
+  if (env.NODE_ENV !== 'test') {
+    server.listen(PORT, '0.0.0.0', () =>
+      log.info(`server is running on PORT ${PORT}`)
+    )
+  }
+})
 
 export default server

@@ -18,4 +18,4 @@ COPY --from=build /app/package.json .
 
 RUN npm install --production
 
-CMD [ "npm", "run", "start:production" ]
+CMD [ "npm", "run", "serve" ]

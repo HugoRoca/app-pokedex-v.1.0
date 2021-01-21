@@ -47,7 +47,7 @@ export default class {
 
     if (ctx.status === 500) {
       title = 'Internal server error'
-      detail = ''
+      detail = err.stack
     }
 
     ctx.body = toResponse(ctx.status, {
